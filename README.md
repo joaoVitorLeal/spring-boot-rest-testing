@@ -40,9 +40,14 @@ It is intended for developers who want to learn or reinforce their testing skill
 
 ## 🚀 How to Run the Tests
 
-1. Clone this repository.
-2. Ensure you have Java 21+ and Maven installed.
-3. Run the tests using:
+1. Clone this repository:
+
+```bash
+git clone https://github.com/joaoVitorLeal/spring-boot-rest-testing.git
+cd spring-boot-rest-testing
+```
+3. Ensure you have Java 21+ and Maven installed.
+4. Run the tests using:
 
 ```bash
 mvn test
@@ -98,9 +103,14 @@ Destina-se a desenvolvedores que desejam aprender ou reforçar suas habilidades 
 
 ## 🚀 Como Executar os Testes
 
-1. Clone este repositório.
-2. Certifique-se de ter Java 21+ e Maven instalados.
-3. Execute os testes com:
+1. Clone este repositório:
+
+```bash
+git clone https://github.com/joaoVitorLeal/spring-boot-rest-testing.git
+cd spring-boot-rest-testing
+```
+3. Certifique-se de ter Java 21+ e Maven instalados.
+4. Execute os testes com:
 
 ```bash
 mvn test
