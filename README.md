@@ -54,7 +54,7 @@ mvn verify
 ```
 
 ## 📄 License
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
@@ -112,4 +112,4 @@ mvn verify
 ```
 
 ## 📄 Licença
-Este projeto está licenciado sob a Licença MIT.
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
