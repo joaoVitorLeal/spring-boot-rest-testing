@@ -1,6 +1,6 @@
 HELP.md
-/src/main/java/io/github/joaoVitorLeal/Greeting.java
-/src/main/java/io/github/joaoVitorLeal/GreetingController.java
+/src/main/java/io/github/joaoVitorLeal/obsolete/Greeting.java
+/src/main/java/io/github/joaoVitorLeal/obsolete/GreetingController.java
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
