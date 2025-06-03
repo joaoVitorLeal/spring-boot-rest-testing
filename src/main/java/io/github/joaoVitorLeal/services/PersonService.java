@@ -1,73 +1,64 @@
 package io.github.joaoVitorLeal.services;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import io.github.joaoVitorLeal.exceptions.ResourceNotFoundException;
 import io.github.joaoVitorLeal.model.Person;
+import io.github.joaoVitorLeal.repositories.PersonRepository;
 
 @Service
 public class PersonService {
 	
-	private final AtomicLong counter = new AtomicLong(); // Simular o ID
 	private Logger logger = Logger.getLogger(PersonService.class.getName());
 	
-	public Person findById(String id) {
-		
+	private final PersonRepository repository;
+	
+	public PersonService(PersonRepository repository) {
+		this.repository = repository;
+	}
+	
+	public Person findById(Long id) {
 		logger.info("Finding one person.");
-		
-		// Mock temporário -> Estrutura de código que sustenta o projeto enquanto outros compenentes da aplicação ainda não foram desenvolvidos
-		Person person = new Person();
-		person.setId(counter.incrementAndGet());
-		person.setFirstName("João");
-		person.setSecondName("Leal");
-		person.setAddress("Salvador - Bahia - Brasil");
-		person.setGender("Male");
-		
-		return person;
+		return repository.findById(id)
+				.orElseThrow(()-> new ResourceNotFoundException("No records found for this id: " + id));
 	}
 
 	public List<Person> findAll() {
-		
 		logger.info("Finding all people.");
-		
-		List<Person> persons = new ArrayList<>();
-		for (int i = 0; i < 8; i++) {
-			Person person = mockPerson(i);
-			persons.add(person);
-		}	
-		return persons;	
+		return repository.findAll();	
 	}
-
+	
+	@Transactional
 	public Person create(Person person) {
 		logger.info("Creating one person.");
-		return person;
+		return repository.save(person);
 	}
 	
+	@Transactional
 	public Person update(Person person) {
 		logger.info("Updating one person.");
-		return person;
+		
+		var existingPerson = repository.findById(person.getId())
+		.orElseThrow(()-> new ResourceNotFoundException("No records found for this id: " + person.getId()));
+		
+		existingPerson.setFirstName(person.getFirstName());
+		existingPerson.setLastName(person.getLastName());
+		existingPerson.setAddress(person.getAddress());
+		existingPerson.setGender(person.getGender());
+	
+		return repository.save(existingPerson);
 	}
 	
-	public void delete(String id) {
+	@Transactional
+	public void delete(Long id) {
 		logger.info("Delete one person.");
+		
+		Person existingPerson = repository.findById(id)
+				.orElseThrow(()-> new ResourceNotFoundException("No records found for this id: " + id));
+		repository.delete(existingPerson);
 	}
-	
-	private Person mockPerson(int i) {
-		Person person = new Person();
-		person.setId(counter.incrementAndGet());
-		person.setFirstName("Person name " + i);
-		person.setSecondName("Last Name " + i);
-		person.setAddress("Some address in Brazil " + i);
-		if (i % 2 == 0) {
-			person.setGender("Male");			
-		} else {
-			person.setGender("Female");			
-		}
-		return person;
-	}
-
 }

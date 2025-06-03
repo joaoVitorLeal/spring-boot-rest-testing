@@ -1,3 +1,4 @@
+.env.vars
 HELP.md
 /src/main/java/io/github/joaoVitorLeal/obsolete/Greeting.java
 /src/main/java/io/github/joaoVitorLeal/obsolete/GreetingController.java
