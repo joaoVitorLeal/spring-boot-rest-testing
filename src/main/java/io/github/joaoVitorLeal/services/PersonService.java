@@ -47,6 +47,7 @@ public class PersonService {
 		
 		existingPerson.setFirstName(person.getFirstName());
 		existingPerson.setLastName(person.getLastName());
+		existingPerson.setEmail(person.getEmail());
 		existingPerson.setAddress(person.getAddress());
 		existingPerson.setGender(person.getGender());
 	

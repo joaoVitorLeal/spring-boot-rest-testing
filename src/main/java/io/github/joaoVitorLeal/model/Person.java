@@ -26,6 +26,9 @@ public class Person implements Serializable {
 	@Column(name = "last_name", nullable = false, length = 80)
 	private String lastName;
 	
+	@Column(nullable = false, unique = true, length = 150)
+	private String email;
+	
 	@Column(nullable = false, length = 100)
 	private String address;
 	
@@ -34,19 +37,19 @@ public class Person implements Serializable {
 
 	public Person() {}
 
-	public Person(String firstName, String lastName, String address, String gender) {
-		super();
+	public Person(String firstName, String lastName, String email, String address, String gender) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
 		this.address = address;
 		this.gender = gender;
 	}
 
-	public Person(Long id, String firstName, String lastName, String address, String gender) {
-		super();
+	public Person(Long id, String firstName, String lastName, String email, String address, String gender) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
 		this.address = address;
 		this.gender = gender;
 	}
@@ -73,6 +76,14 @@ public class Person implements Serializable {
 
 	public void setLastName(String secondName) {
 		this.lastName = secondName;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getAddress() {
