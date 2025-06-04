@@ -13,39 +13,33 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import io.github.joaoVitorLeal.model.Person;
 
 @DataJpaTest
-@TestInstance(Lifecycle.PER_CLASS)
 class PersonRepositoryTest {
 	
 	@Autowired
 	private PersonRepository repository;
+
+	private Person person0;
 	
 	@BeforeEach
 	void setup() {
-		repository.deleteAll();
+		// Given / Arrange //
+		person0 = new Person("João", "Castro", "joaoleal98@outlook.com", "Salvador - BA - Brasil", "Male");
 	}
 	
-	@AfterAll
-	void cleanup() {
-		repository.deleteAll();
-	}
 	
 	@Test
 	@DisplayName("Given person object when save() is called, then return saved person")
 	void testGivenPersonObject_whenSave_thenReturnSavedPerson() {
-		// Given
-		Person person0 = new Person("João", "Castro", "joaoleal98@outlook.com", "Salvador - BA - Brasil", "Male");
+		// Given - is in the setup()
 		
 		// When
 		Person savedPerson = repository.save(person0);
@@ -61,8 +55,7 @@ class PersonRepositoryTest {
 	@Test
 	@DisplayName("Given person object when findById() is called, then return the same person")
 	void testGivenPersonObject_whenFindById_thenReturnPersonObject() {
-		// Given
-		Person person0 = new Person("João", "Castro", "joaoleal98@outlook.com", "Salvador - BA - Brasil", "Male");
+		// Given 
 		repository.save(person0);
 
 		// When
@@ -77,7 +70,6 @@ class PersonRepositoryTest {
 	@DisplayName("Given person object when findByEmail() is called, then return the same person")
 	void testGivenPersonObject_whenFindByEmail_thenReturnPersonObject() {
 		// Given
-		Person person0 = new Person("João", "Castro", "joaoleal98@outlook.com", "Salvador - BA - Brasil", "Male");
 		repository.save(person0);
 
 		// When
@@ -92,14 +84,13 @@ class PersonRepositoryTest {
 	    assertThat(savedPerson.getFirstName(), startsWith("Jo")); // valida prefixo do nome
 	    assertThat(savedPerson.getGender(), is("Male")); // valida gênero
 	    assertThat(savedPerson.getAddress(), containsString("Brasil")); // valida que o endereço contém "Brasil"
-	    assertThat(savedPerson, notNullValue()); // redundante, mas expressivo
+	    assertThat(savedPerson, notNullValue()); // redundant, but expressive
 	}
 	
 	@Test
 	@DisplayName("Given person list when findAll() is called, then return all persons")
 	void testGivenPersonList_whenFindAll_thenReturnPersonList() {
 		// Given
-		Person person0 = new Person("João", "Castro", "joaoleal98@outlook.com", "Salvador - BA - Brasil", "Male");
 		Person person1 = new Person("Manuela", "Mariano", "manuarq@gmail.com", "Belo Horizonte - MG - Brasil", "Female");
 		repository.save(person0);
 		repository.save(person1);
@@ -118,7 +109,6 @@ class PersonRepositoryTest {
 	@DisplayName("Given person object when update() is called, then return updated person")
 	void testGivenPersonObject_whenUpdatePerson_thenReturnUpdatedPersonObject() {
 		// Given
-		Person person0 = new Person("João", "Castro", "joaoleal98@outlook.com", "Salvador - BA - Brasil", "Male");
 		repository.save(person0);
 
 		// When
@@ -139,7 +129,6 @@ class PersonRepositoryTest {
 	@DisplayName("JUnit test for Given person object when delete() is called, then remove person")
 	void testGivenPersonObject_whenDelete_thenRemovePerson() {
 		// Given
-		Person person0 = new Person("João", "Castro", "joaoleal98@outlook.com", "Salvador - BA - Brasil", "Male");
 		repository.save(person0);
 
 		// When
@@ -154,9 +143,9 @@ class PersonRepositoryTest {
 	@DisplayName("Given person object when findByJPQL() is called, then return the same person")
 	void testGivenPersonObject_whenFindByJPQL_thenReturnPersonObject() {
 		// Given
-		Person person0 = new Person("João", "Castro", "joaoleal98@outlook.com", "Salvador - BA - Brasil", "Male");
 		repository.save(person0);
 		
+		// Data of person0
 		String firstName = "João";
 		String lastName = "Castro";
 		
@@ -173,9 +162,9 @@ class PersonRepositoryTest {
 	@DisplayName("Given person object when findByJPQLNamedParameters is called, then return the same person")
 	void shouldReturnPersonObject_whenFindByJPQLNamedParametersIsCalled() {
 		// Given
-		Person person0 = new Person("João", "Castro", "joaoleal98@outlook.com", "Salvador - BA - Brasil", "Male");
 		repository.save(person0);
-
+		
+		// Data of person0
 		String firstName = "João";
 		String lastName = "Castro";
 		String gender = "Male";
@@ -194,11 +183,10 @@ class PersonRepositoryTest {
 	@DisplayName("Given person object when findByNativeSQL is called, then return the same person")
 	void shouldReturnPersonObject_whenFindByNativeSQLIsCalled() {
 		// Given
-		String firstName = "João";
-		String email = "joaoleal98@outlook.com";
-		
-		Person person0 = new Person(firstName, "Castro", email, "Salvador - BA - Brasil", "Male");
 		repository.save(person0);
+		
+		String firstName = "João"; // First name of person0
+		String email = "joaoleal98@outlook.com"; // Email of person0
 		
 		// When
 		Person savedPerson = repository.findByNativeSQL(firstName, email); 
@@ -216,7 +204,6 @@ class PersonRepositoryTest {
 		String firstName = "João";
 		String email = "joaoleal98@outlook.com";
 		
-		Person person0 = new Person(firstName, "Castro", email, "Salvador - BA - Brasil", "Male");
 		repository.save(person0);
 		
 		// When
