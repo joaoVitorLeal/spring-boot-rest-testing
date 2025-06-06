@@ -1,11 +1,13 @@
 package io.github.joaoVitorLeal.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.github.joaoVitorLeal.exceptions.DuplicateRegistrationException;
 import io.github.joaoVitorLeal.exceptions.ResourceNotFoundException;
 import io.github.joaoVitorLeal.model.Person;
 import io.github.joaoVitorLeal.repositories.PersonRepository;
@@ -35,6 +37,11 @@ public class PersonService {
 	@Transactional
 	public Person create(Person person) {
 		logger.info("Creating one person.");
+		
+		Optional<Person> savedPerson = repository.findByEmail(person.getEmail());
+		if (savedPerson.isPresent()) {
+			throw new DuplicateRegistrationException("Person already exist with given email: " + person.getEmail());
+		}
 		return repository.save(person);
 	}
 	
@@ -43,7 +50,7 @@ public class PersonService {
 		logger.info("Updating one person.");
 		
 		var existingPerson = repository.findById(person.getId())
-		.orElseThrow(()-> new ResourceNotFoundException("No records found for this id: " + person.getId()));
+				.orElseThrow(()-> new ResourceNotFoundException("No records found for this id: " + person.getId()));
 		
 		existingPerson.setFirstName(person.getFirstName());
 		existingPerson.setLastName(person.getLastName());

@@ -22,7 +22,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import io.github.joaoVitorLeal.model.Person;
 
 @DataJpaTest
-class PersonRepositoryTest {
+public class PersonRepositoryTest {
 	
 	@Autowired
 	private PersonRepository repository;
@@ -54,7 +54,7 @@ class PersonRepositoryTest {
 	
 	@Test
 	@DisplayName("Given person object when findById() is called, then return the same person")
-	void testGivenPersonObject_whenFindById_thenReturnPersonObject() {
+	void testGivenPersonId_whenFindById_thenReturnPersonObject() {
 		// Given 
 		repository.save(person0);
 

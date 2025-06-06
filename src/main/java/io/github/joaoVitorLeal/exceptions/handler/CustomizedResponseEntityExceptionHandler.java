@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import io.github.joaoVitorLeal.exceptions.DuplicateRegistrationException;
 import io.github.joaoVitorLeal.exceptions.ExceptionResponse;
 import io.github.joaoVitorLeal.exceptions.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -47,5 +48,15 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 	    );
 	    
 	    return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(DuplicateRegistrationException.class)
+	@ResponseStatus(value = HttpStatus.CONFLICT)
+	public final ResponseEntity<ExceptionResponse> handleDuplicateRegistrationException(
+			DuplicateRegistrationException ex, WebRequest request) {
+		
+		ExceptionResponse exceptionResponse = new ExceptionResponse(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+		
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.CONFLICT);
 	}
 }
