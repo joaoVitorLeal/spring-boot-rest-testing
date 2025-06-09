@@ -1,20 +1,19 @@
-spring:
+# Application port to test environment with testcontainers 
+server:
+  port: 8888
+spring:  
   application:
     name: spring-boot-rest-testing
   config:
     activate:
       on-profile: test
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:test_db;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    show-sql: true
+    hibernate:
+     ddl-auto: update
+    show-sql: false
     properties:
       hibernate:
-        ddl-auto: update
-        '[format_sql]': true
+       dialiect: org.hibernate.dialect.MySQL8Dialect
+       '[format_sql]': false

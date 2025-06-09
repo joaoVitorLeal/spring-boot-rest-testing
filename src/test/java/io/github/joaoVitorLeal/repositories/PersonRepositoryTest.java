@@ -17,12 +17,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
+import io.github.joaoVitorLeal.integrationtests.testcontainers.AbstractIntegrationTest;
 import io.github.joaoVitorLeal.model.Person;
 
 @DataJpaTest
-public class PersonRepositoryTest {
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // Impedir que o Spring Boot substitua sua configuração de banco de dados real por um banco de dados em memória 
+@ActiveProfiles("test")
+public class PersonRepositoryTest extends AbstractIntegrationTest {
 	
 	@Autowired
 	private PersonRepository repository;
@@ -34,7 +39,6 @@ public class PersonRepositoryTest {
 		// Given / Arrange //
 		person0 = new Person("João", "Castro", "joaoleal98@outlook.com", "Salvador - BA - Brasil", "Male");
 	}
-	
 	
 	@Test
 	@DisplayName("Given person object when save() is called, then return saved person")
