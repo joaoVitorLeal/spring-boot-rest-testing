@@ -18,6 +18,11 @@ Currently using:
 - Spring Boot 3.5.*
 - JUnit 5
 - Mockito
+- Testcontainers
+- REST-Assured
+- Jacoco
+- EclEmma
+- Surefire
 - Spring Test
 - Maven
 
