@@ -34,7 +34,7 @@ Currently using:
 - Test Configuration and Setup
 - Mocking and Dependency Injection in Tests
 
-## 🎯 Purpose
+## 🎯 Goals
 
 Educational repository for practicing **unit and integration testing** techniques using Spring Boot.  
 It is intended for developers who want to learn or reinforce their testing skills in Java-based REST APIs.
