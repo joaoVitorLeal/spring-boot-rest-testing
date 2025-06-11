@@ -4,8 +4,6 @@
 ![Java](https://img.shields.io/badge/Java-21-blue)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.x-brightgreen)
 
-> 🚧 This project is currently under development. New features, technologies, and improvements may be added over time.
-
 This repository demonstrates how to implement **unit tests** and **integration tests** in a **Spring Boot REST API**.
 
 It covers key testing strategies, best practices, and usage of essential testing libraries and frameworks.
@@ -25,8 +23,6 @@ Currently using:
 - Surefire
 - Spring Test
 - Maven
-
-> Additional tools and technologies may be incorporated as the project evolves.
 
 ## ✅ Topics Covered
 
@@ -72,8 +68,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 # Spring Boot REST Testing
 
-> 🚧 Este projeto está atualmente em desenvolvimento. Novas funcionalidades, tecnologias e melhorias podem ser adicionadas ao longo do tempo.
-
 Este repositório demonstra como implementar **testes unitários** e **testes de integração** em uma **API REST com Spring Boot**.
 
 Ele aborda as principais estratégias de testes, boas práticas e o uso de bibliotecas e frameworks essenciais.
@@ -86,10 +80,13 @@ Atualmente utilizando:
 - Spring Boot 3.5.*
 - JUnit 5
 - Mockito
+- Testcontainers
+- REST-Assured
+- Jacoco
+- EclEmma
+- Surefire
 - Spring Test
 - Maven
-
-> Outras ferramentas e tecnologias podem ser incorporadas conforme o projeto evolui.
 
 ## ✅ Tópicos Abordados
 
